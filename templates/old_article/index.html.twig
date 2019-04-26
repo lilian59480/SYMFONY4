@@ -1,0 +1,25 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+<div class="container">
+    <p>Nbr article: {{ articles|length }} </p>
+    <ul class="list-group">
+        {% for article in articles %}
+            <a href="{{ path('oldarticle_show', {"id":article.id}) }}" class="list-group-item list-group-item-action">
+                <div class="d-flex justify-content-between">
+                    <h5 class="mb-1">{{ article.title }}</h5>
+                    <small>{{ article.createdAt|date("d/m/Y") }}</small>
+                </div>
+                <p class="mb-1">
+                    {% if article.content|length > 100 %}
+                        {{ article.content|slice(0, 97) }} ...
+                    {% else %}
+                        {{ article.content }}
+                    {% endif %}
+                </p>
+                
+            </a>
+        {% endfor %}
+    </ul>
+</div>
+{% endblock %}
